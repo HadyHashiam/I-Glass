@@ -1,0 +1,203 @@
+   /* Navbar */
+   nav {
+     font-family: 'Titillium Web';
+     text-transform: uppercase;
+     text-align: center;
+     font-weight: 600;
+   }
+
+   nav * {
+     box-sizing: border-box;
+     transition: all .35s ease;
+   }
+
+   nav li {
+     display: inline-block;
+     list-style: outside none none;
+     margin: .5em 1em;
+     padding: 0;
+   }
+
+   nav a {
+     padding: .5em .8em;
+     color: rgba(255, 255, 255, .5);
+     position: relative;
+     text-decoration: none;
+     font-size: 20px;
+   }
+
+   nav a::before,
+   nav a::after {
+     content: '';
+     height: 14px;
+     width: 14px;
+     position: absolute;
+     transition: all .35s ease;
+     opacity: 0;
+   }
+
+   nav a::before {
+     content: '';
+     right: 0;
+     top: 0;
+     border-top: 3px solid #3E8914;
+     border-right: 3px solid #2E640F;
+     transform: translate(-100%, 50%);
+   }
+
+   nav a:after {
+     content: '';
+     left: 0;
+     bottom: 0;
+     border-bottom: 3px solid #2E640F;
+     border-left: 3px solid #3E8914;
+     transform: translate(100%, -50%)
+   }
+
+   nav a:hover:before,
+   nav a:hover:after {
+     transform: translate(0, 0);
+     opacity: 1;
+   }
+
+   nav a:hover {
+     color: #3DA35D;
+   }
+
+   #line {
+     border-right: 20px;
+     background-color: #EFE9CC;
+     height: 60px;
+     width: 3px;
+     position: relative;
+     right: 10px;
+   }
+
+   .nav-submit-btn {
+     border-radius: 15px;
+   }
+
+   .nav-submit-btn:hover {
+     background-color: rgb(128, 0, 0);
+   }
+
+   /* Navbar */
+   label {
+     color: #337357;
+   }
+
+   /* footer */
+   .social-icons {
+     display: flex;
+     justify-content: end;
+
+   }
+
+   .social-icon {
+     display: flex;
+
+     position: relative;
+     width: 80px;
+     height: 80px;
+     margin: 0 0.5rem;
+     border-radius: 50%;
+     cursor: pointer;
+     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+     font-size: 2.5rem;
+     text-decoration: none;
+     transition: all 0.15s ease;
+
+     &:hover {
+       color: #fff;
+
+       .tooltip {
+         visibility: visible;
+         opacity: 1;
+         transform: translate(-50%, -150%);
+       }
+     }
+
+     &:active {
+       box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5) inset;
+     }
+
+
+
+     i {
+       position: relative;
+       top: 1px;
+     }
+   }
+
+   .tooltip {
+     display: block;
+     position: absolute;
+     top: 0;
+     left: 50%;
+     padding: 0.8rem 1rem;
+     border-radius: 40px;
+     font-size: 0.8rem;
+     font-weight: bold;
+     opacity: 0;
+     pointer-events: none;
+     text-transform: uppercase;
+     transform: translate(-50%, -100%);
+     transition: all 0.3s ease;
+     z-index: 1;
+
+     &:after {
+       display: block;
+       position: absolute;
+       bottom: 1px;
+       left: 50%;
+       width: 0;
+       height: 0;
+       content: "";
+       border: solid;
+       border-width: 10px 10px 0 10px;
+       border-color: transparent;
+       transform: translate(-50%, 100%);
+     }
+   }
+
+   .footer {
+     font-size: 23px;
+     display: flex;
+     gap: 50px;
+     justify-content: center;
+   }
+
+   /* footer */
+
+
+
+   /* responsive for mobile phones */
+   @media only screen and (max-width: 768px) {
+
+     .custom-card {
+       background: rgba(190, 190, 190, 0.8);
+       /* Use an RGBA value for a transparent white background */
+       border: 2px solid #3498db;
+       /* Add a border with a cool blue color */
+       border-radius: 10px;
+       /* Add rounded corners */
+       font-size: 10px;
+       position: relative;
+       height: 650px;
+
+       right: 20px;
+     }
+
+     .footer {
+       font-size: 10px;
+       display: flex;
+       gap: 50px;
+       justify-content: center;
+     }
+
+     .copyrights {
+       position: relative;
+       left: 20px;
+     }
+
+   }

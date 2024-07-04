@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+
+  <!-- bootstrap call -->
+  <link href="/css2/bootstrap.min.css" rel="stylesheet" />
+  <script src="/js2/bootstrap.bundle.js"></script>
+
+  <!-- bootstrap call -->
+  <!-- font awesome  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
+  <!-- css link  -->
+  <link rel="stylesheet" href="./css/home.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css" />
+
+  <title>Home</title>
+</head>
+
+<body>
+  <!-- Navigation bar (1) -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1d5c63" ;>
+    <div class="container-fluid">
+      <a style="color: #e4e4d0" class="navbar-brand" href="#">
+        <i class="fa-solid fa-glasses fa-lg" style="color: #e4e4d0"></i>
+        Iglass</a>
+      <div id="line"></div>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="aboutUs">About us</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="contactUs">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cart">Cart</a>
+          </li>
+          <% if(isAdmin) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="addproduct">add product</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="orders ">Manage Order</a>
+            </li>
+            <% } %>
+
+              &nbsp;&nbsp;&nbsp;
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  More
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                  <li>
+                    <a class="dropdown-item" href="/logOut">Log out</a>
+                  </li>
+                </ul>
+              </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div>
+      <div id="favoritesIcon" class="">
+        <% if(isUser) { %>
+          <i class="fa fa-heart icon" style="color: #f2ead3"></i>
+          <!-- <span id="favoritesCount" class="favorites-count">0</span> -->
+          <% } %>
+      </div>
+    </div>
+
+
+    <div class="cart-btn">
+      <i id="cart" <% if(isUser) { %>
+        class="fa-solid fa-cart-shopping"
+        <% } %>
+          <% if(isUser) { %>
+            style="color: #f2ead3"
+            <% } %>
+              >
+      </i>
+      <% if(isUser) { %>
+        <span class="cart-quantity">0</span>
+        <% } %>
+    </div>
+
+  </nav>
+  <!-- Navigation bar (1) -->
+  <!-- get data from database collection -->
+  <div class="favorites-container" style="display: none">
+    <h2>Favorites:</h2>
+    <ul id="favoritesList">
+      <% itemsInFav.forEach(itemId=> { %>
+        <% products.forEach(product=> { %>
+          <% if (product._id===itemId) { %>
+            <div class="favorite-item">
+              <img src="<%= product.image %>" alt="<%= product.name %>">
+              <div class="favorite-details">
+                <h4>
+                  <%= product.name %>
+                </h4>
+                <span>$ <%= product.price %></span>
+                <button class="remove-from-favorites">Remove</button>
+              </div>
+            </div>
+            <% } %>
+              <% }) %>
+                <% }) %>
+    </ul>
+  </div>
+
+
+  <!-- Cart Modal -->
+
+  <div class="cart-modal-overlay">
+    <div class="cart-modal">
+      <i id="close-btn" class="fas fa-times"></i>
+      <h1 class="cart-is-empty">Cart is empty</h1>
+      <div class="product-rows">
+        <% itemsInCart.forEach(itemId=> { %>
+          <% products.forEach(product=> { %>
+            <% if (product._id===itemId) { %>
+              <div class="product-row">
+                <h5 class="product-title">
+                  <%= product.name %>
+                </h5>
+                <span class="cart-price">$<%= product.price %>
+                </span>
+                <img src="<%= product.image %>" class="cart-image" alt="<%= product.name %>">
+                <input class="product-quantity" type="number" value="1">
+                <button class="remove-btn">REMOVE</button>
+              </div>
+              <% } %>
+                <% }) %>
+                  <% }) %>
+      </div>
+      <div class="total">
+        <h1 class="cart-total">TOTAL</h1>
+        <span class="total-price">$<%= totalPrice %></span>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <tbody>
+          <form action="orders" method="POST">
+            <a href="deliveryDetails">
+              <button class="purchase-btn"></button>
+            </a>
+          </form>
+        </tbody>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Navigation bar (2) -->
+  <div class="header style list">
+    <nav class="navbar navbar-expand-lg second-nav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"> </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#newArrivals">new arrivals</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Sunglasses
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li>
+                  <a class="dropdown-item" href="#menSunglasses">Men</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#womenSunglasses">Women</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#kids">Kids</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Eyeglasses
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li>
+                  <a class="dropdown-item" href="#menEyeglasses">Men</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#womenEyeglasses">Women</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#kids">Kids</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="virtualTryOn">virtual-try-on</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!-- Navigation bar (2) -->

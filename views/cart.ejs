@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- bootstrap call -->
+  <link href="css2/bootstrap.min.css" rel="stylesheet" />
+  <script src="js2/bootstrap.bundle.js"></script>
+  <!-- bootstrap call -->
+
+  <!-- font-awesome CDN call  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <!-- font-awseome CDN call -->
+
+  <!-- Google font call -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Russo+One&display=swap" rel="stylesheet" />
+  <!-- Google font call -->
+
+  <link rel="stylesheet" href="css/home.css" />
+
+  <title> Cart</title>
+
+  <style>
+    .product-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .product-table th,
+    .product-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .product-table th {
+      background-color: #f2f2f2;
+    }
+
+    .product-actions form {
+      display: flex;
+      gap: 5px;
+    }
+
+    .product-actions form button {
+      flex: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation bar -->
+<%- include('parts/navbar.ejs') %>
+
+
+
+  <div class="d-flex justify-content-start align-items-upper p-2 vh-100">
+    <div class="container">
+        <!-- Error message section -->
+        <% if(errorMessage) { %>
+          <div class="alert alert-danger" role="alert">
+            <%= errorMessage.msg %>
+          </div>
+          <% } %>
+
+      <% if(items.length===0) { %>
+        <p class="alert alert-danger">There are no items</p>
+        <% } else { %>
+          <table class="product-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Product name</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(let i=0; i < items.length; i++) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= items[i].name %></td>   
+                  <td> <%= items[i].price  %> $</td>
+                  <td class="product-actions">
+                    <form method="POST">
+                      <input type="hidden" name="cartId" value="<%= items[i]._id %>">
+                      <input type="text" name="amount" id ="amount" value="<%= items[i].amount %>">
+                      <input type="submit" class="btn btn-success" value="Save" formaction="/cart/save">
+                      <a href="/deliveryDetails?order=<%= items[i]._id %>" class="btn btn-primary btn-order">verify order</a>
+                      <button type="submit" class="btn btn-danger btn-delete" formaction="/cart/delete">Delete</button>
+                    </form>
+                  </td>
+                  
+                </tr>
+                <% } %>
+            </tbody>
+          </table>
+          <% } %>
+    </div>
+
+  </div>
+  
+<!-- Add this script to handle the insufficient quantity error -->
+
+
+
+
+<%- include('parts/footer.ejs') %>

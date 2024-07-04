@@ -1,0 +1,500 @@
+body {
+    background-color: #f8f8f85a;
+}
+
+
+/* Navbar */
+nav {
+    font-family: 'Titillium Web';
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+}
+
+nav * {
+    box-sizing: border-box;
+    transition: all .35s ease;
+}
+
+nav li {
+    display: inline-block;
+    list-style: outside none none;
+    margin: .5em 1em;
+    padding: 0;
+}
+
+nav a {
+    padding: .5em .8em;
+    color: #0fa854;
+    position: relative;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+nav a::before,
+nav a::after {
+    content: '';
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    transition: all .35s ease;
+    opacity: 0;
+}
+
+nav a::before {
+    content: '';
+    right: 0;
+    top: 0;
+    border-top: 3px solid #3E8914;
+    border-right: 3px solid #2E640F;
+    transform: translate(-100%, 50%);
+}
+
+nav a:after {
+    content: '';
+    left: 0;
+    bottom: 0;
+    border-bottom: 3px solid #2E640F;
+    border-left: 3px solid #3E8914;
+    transform: translate(100%, -50%)
+}
+
+nav a:hover:before,
+nav a:hover:after {
+    transform: translate(0, 0);
+    opacity: 1;
+}
+
+nav a:hover {
+    color: #3DA35D;
+}
+
+#line {
+    border-right: 20px;
+    background-color: #EFE9CC;
+    height: 60px;
+    width: 3px;
+    position: relative;
+    right: 10px;
+}
+
+.nav-submit-btn {
+    border-radius: 15px;
+}
+
+.nav-submit-btn:hover {
+    background-color: #1d5c63;
+}
+
+/* Navbar */
+.navbar-toggler-icon {
+    background-color: #1d5c63;
+    /* Change to your desired color */
+}
+
+
+/*? ****************************** St1art nav  *******************************/
+.header {
+    text-align: center;
+
+    color: #FFF7E0;
+    background-color: #E1F0DA;
+}
+
+
+
+
+
+.nav-link:hover {
+    cursor: pointer;
+    transform: scaleX(1);
+    color: #658361;
+    text-decoration: underline
+}
+
+.right {
+    color: #f9f9f9;
+    background-color: #436850;
+    font-size: 1rem;
+
+}
+
+.fa-magnifying-glass {
+    margin: 0 0% 0 1%;
+    color: #436850;
+}
+
+.fa-magnifying-glass:hover,
+.fa-cart-shopping:hover,
+.fa-user:hover,
+.fa-heart:hover {
+    cursor: pointer;
+    transform: scaleX(1.1);
+    color: #183a1d
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    position: relative;
+}
+
+
+/*? ****************************** Start section 1  *******************************/
+.start img {
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+}
+
+.start h1 {
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 4rem;
+    font-family: bold;
+    margin-top: 2%;
+    color: #DBD0C0;
+}
+
+.start p {
+    width: 80%;
+    text-transform: capitalize;
+    margin: 1% 4% 1% 10%;
+    font-size: 1.6rem;
+    line-height: 40px;
+    color: #B3A398;
+
+}
+
+/*? ******************************end section 1  *******************************/
+/*? ****************************** Start section 2  *******************************/
+.upload-container {
+    width: 80%;
+    margin: 2% 0% 0 8%;
+    height: 650px;
+    background-color: #F4F9F4;
+    border: 5px solid #5C715E;
+
+}
+
+.upload-container img {
+    margin: 4% 4% 3% 7%;
+    padding-bottom: 5%;
+    width: 60%;
+    height: 600px;
+}
+
+.upload-container span {
+    margin: 15% 0% 0 1%;
+}
+
+
+
+.upload-btn {
+    display: inline-block;
+    text-align: center;
+    margin-top: 50%;
+    padding: 6%;
+    height: 50px;
+    width: 170px;
+    background-color: #3D8361;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.2rem;
+
+}
+
+.upload-btn:hover {
+    background-color: #146356;
+}
+
+.file-input {
+    display: none;
+}
+
+#file-label {
+    font-size: 1.3rem;
+    margin: 5% 0 0 8%;
+    color: #066443;
+
+}
+
+/*? ****************************** end section 1  *******************************/
+/*? ******************************start camera *******************************/
+.open {
+    margin: 5%;
+    padding: 0;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.open img {
+    width: 40%;
+}
+
+#camera-viewfinder {
+    width: 320px;
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+#camera-viewfinder::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    width: 100px;
+    height: 60px;
+
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #3D8361;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.btn:hover {
+    background-color: #146356;
+    color: white;
+}
+
+
+/* footer */
+.social-icons {
+    display: flex;
+    justify-content: end;
+
+}
+
+.social-icon {
+    display: flex;
+
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 2.5rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+
+    &:hover {
+        color: #fff;
+
+        .tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translate(-50%, -150%);
+        }
+    }
+
+    &:active {
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5) inset;
+    }
+
+
+
+    i {
+        position: relative;
+        top: 1px;
+    }
+}
+
+.tooltip {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    padding: 0.8rem 1rem;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    opacity: 0;
+    pointer-events: none;
+    text-transform: uppercase;
+    transform: translate(-50%, -100%);
+    transition: all 0.3s ease;
+    z-index: 1;
+
+    &:after {
+        display: block;
+        position: absolute;
+        bottom: 1px;
+        left: 50%;
+        width: 0;
+        height: 0;
+        content: "";
+        border: solid;
+        border-width: 10px 10px 0 10px;
+        border-color: transparent;
+        transform: translate(-50%, 100%);
+    }
+}
+
+.footer {
+    font-size: 23px;
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+}
+
+/* footer */
+
+@media (max-width: 850px) {
+    .start {
+        flex-direction: column;
+        padding-bottom: 30px;
+    }
+
+    .start img {
+        height: 200px;
+    }
+
+    .start h1 {
+        font-size: 1.5rem;
+    }
+
+    .start p {
+        font-size: 0.8rem;
+        line-height: 25px;
+        margin-bottom: 15px;
+    }
+
+    .work img {
+        height: 230px;
+        margin-bottom: 20px;
+        width: 600px;
+        margin-left: 50px;
+    }
+
+    .upload-container {
+        width: 500px;
+        height: 200px;
+    }
+
+    .upload-container img {
+        margin-top: 35px;
+        width: 220px;
+        height: 150px;
+    }
+
+    .upload-container span {
+        margin-left: 10px;
+    }
+
+
+
+    .upload-btn {
+        display: inline-block;
+        text-align: center;
+        margin-top: 10px;
+        padding: 4px;
+        height: 25px;
+        width: 80px;
+        background-color: #3D8361;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 1px;
+        font-size: 0.5rem;
+
+    }
+
+
+    .file-input {
+        display: none;
+    }
+
+    #file-label {
+        font-size: 0.7rem;
+
+    }
+
+    .open {
+        margin: 20px;
+        height: 200px;
+        display: flex;
+    }
+
+    .open img {
+        width: 200px;
+        height: 200px;
+        margin: 40px 10px;
+    }
+
+    #camera-viewfinder {
+        width: 120px;
+        height: 80px;
+        overflow: hidden;
+        position: relative;
+    }
+
+
+
+    #camera-viewfinder::before {
+        content: "";
+        position: absolute;
+        top: 30px;
+        left: 10px;
+        width: 40px;
+        height: 20px;
+
+    }
+
+    .btn-container {
+        margin-top: 5px;
+    }
+
+    .btn {
+        display: flex;
+        width: 85px;
+        height: 27px;
+        padding: 5px 0px 0 8px;
+        background-color: #3D8361;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 5px;
+        font-size: 0.65rem;
+
+    }
+
+    .btn:hover {
+        background-color: #146356;
+        color: white;
+    }
+}
+
+
+/*? ****************************** end camera  *******************************/
+
+
+/*? ****************************** start footer  *******************************/
+
+
+/*? ****************************** end footer  *******************************/

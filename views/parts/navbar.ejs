@@ -1,0 +1,53 @@
+<!-- Navigation bar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1d5c63">
+  <div class="container-fluid">
+    <a style="color: #e4e4d0" class="navbar-brand" href="#">
+      <i class="fa-solid fa-glasses fa-lg" style="color: #e4e4d0"></i>
+      Iglass</a>
+    <div id="line"></div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+      aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="aboutUs">About us</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="contactUs">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cart">Cart</a>
+        </li>
+        <% if(isAdmin) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="addproduct">add product</a>
+          </li>
+          <% } %>
+          <li class="nav-item">
+            <a class="nav-link" href="orders ">Manage Order</a>
+          </li>
+          
+
+            &nbsp;&nbsp;&nbsp;
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                More
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li>
+                  <a class="dropdown-item" href="/logOut">Log out</a>
+                </li>
+              </ul>
+            </li>
+      </ul>
+    </div>
+  </div>
+</nav>

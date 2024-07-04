@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <!-- bootstrap call -->
+    <link href="css2/bootstrap.min.css" rel="stylesheet" />
+    <script src="js2/bootstrap.bundle.js"></script>
+    <!-- bootstrap call -->
+
+    <!-- font-awesome CDN call  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <!-- font-awseome CDN call -->
+
+    <!-- Google font call -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Russo+One&display=swap" rel="stylesheet" />
+    <!-- Google font call -->
+    <!-- css link  -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css" />
+
+    <link rel="stylesheet" href="css/home.css" />
+    <title>best style</title>
+    <style>
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .product-table th,
+        .product-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .product-table th {
+            background-color: #f2f2f2;
+        }
+
+        .product-actions form {
+            display: flex;
+            gap: 5px;
+        }
+
+        .product-actions form button {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1d5c63">
+        <div class="container-fluid">
+            <a style="color: #e4e4d0" class="navbar-brand" href="#">
+                <i class="fa-solid fa-glasses fa-lg" style="color: #e4e4d0"></i>
+                Iglass</a>
+            <div id="line"></div>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutUs">About us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="contactUs">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart">Cart</a>
+                    </li>
+                    <% if(isAdmin) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="addproduct">add product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="orders ">Manage Order</a>
+                        </li>
+                        <% } %>
+
+                            &nbsp;&nbsp;&nbsp;
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    More
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="/logOut">Log out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        function getClassification(classId) {
+            if (classId === "0") {
+                return "Heart";
+            } else if (classId === "1") {
+                return "Oblong";
+            } else if (classId === "2") {
+                return "Oval";
+            } else if (classId === "3") {
+                return "Round";
+            } else if (classId === "4") {
+                return "Square";
+            } else {
+                return "Unknown";
+            }
+        }
+    </script>
+
+    <% if (products.length===0) { %>
+        <div class="alert alert-danger">there is no products</div>
+        <%} else { %>
+
+    <div class="d-flex justify-content-start ailign-items-center p-5 vh-200"></div>
+        <h1 id="products" class="categorie">your best style is =  <%= classId%></h1>
+
+
+    <h3 id="products" class="categorie">Best Style for Men</h3>
+        <div class="items-container">
+            <% for (let product of products) { %>
+                <% if (product.category === 'Men Eye Glasses' || product.category === 'Men Sun Glasses'){ %>
+                    <% if (product.face_shape===classId || product.face_shape_2===classId || product.face_shape_3===classId ) { %>
+                        <div class="card-1 card">
+                            <h4 class="product-title"><%= product.name %></h4>
+                            <img class="product-image" src="<%= product.image %>" />
+                            <div class="product-details">
+                                <button class="view-button">View&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></button>
+                            </div>
+                            <div class="favorite">
+                                <button class="add-to-favorites"onclick="toggleFavorite('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')">
+                                <i id="heartIcon-<%= product._id %>" class="fa-solid fa-heart 
+                                    <% if (product.isFavorite) { %>favorite<% } else { %>not-favorite<% } %>" style="color: 
+                                    <% if (product.isFavorite) { %>red<% } else { %>#8a8a8a<% } %>"></i>
+                                </button>
+                                </div>
+                            <% if (product.Quantity<=0) { %>
+                                <button class="add-to-cart" style="background-color: #ec4f7e;" disabled>Out of Stock </button>
+                                <% } else if (itemsInCart.includes(product._id)) { %>
+                                    <button class="add-to-cart" style="background-color: #0000FF;" disabled>Added</button>
+                                <% } else { %>
+                                        <button class="add-to-cart"
+                                        onclick="addproductToCart('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')">AddtoCart</button>
+                                <% } %>
+                                    <span class="product-price"><%= product.price %></span>
+                                    <input type="hidden" name="productId" value="<%= product._id%>">
+                            </div>
+                            <% } %>
+                            <% } %>
+                            <% } %> 
+                            
+                        </div>
+
+                        <% if (classId==="Oblong" ) { %>
+                            <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=2104eacdb16144f5be8cf0a64bc0146a&metadata=01"
+                                target="_blank">
+                                <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for men</button>
+                            </a>
+                            <% } else if (classId==="Round" ) { %>
+                                <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=f1e1b8de4b884342af4babc155f15f0c&metadata=01"
+                                    target="_blank">
+                                    <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for men</button>
+                                </a>
+                                <% } else if (classId==="Square" ) { %>
+                                    <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=8ae43de8e60846f2a35aba6fe44efc2c&metadata=01"
+                                        target="_blank">
+                                        <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for
+                                            men</button>
+                                    </a>
+                                    <% } else if (classId==="Oval" ) { %>
+                                        <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=075f41afdabb4adfafbf3469f04208e1&metadata=01"
+                                            target="_blank">
+                                            <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for
+                                                men</button>
+                                        </a>
+                                        <% } else if (classId==="Heart" ) { %>
+                                            <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=f35b7b45f0054cf6a5c2799248a6706f&metadata=01"
+                                                target="_blank">
+                                                <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for
+                                                    men</button>
+                                            </a>
+                                            <% } else { %>
+                                                <a href="#" target="_blank">
+                                                    <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for
+                                                        men</button>
+                                                </a>
+                                                <% } %>
+
+                        
+
+    <div class="d-flex justify-content-start ailign-items-center p-5 vh-200"></div>
+        <h3 id="products" class="categorie">Best Style foe Womens</h3>
+            <div class="items-container">
+                <% for (let product of products) { %>
+                    <% if (product.category==='Women Eye Glasses' || product.category==='Women Sun Glasses' ){ %>
+                    <% if (product.face_shape===classId || product.face_shape_2===classId || product.face_shape_3===classId ) { %>
+                        <div class="card-1 card">
+                            <h4 class="product-title">
+                                <%= product.name %>
+                            </h4>
+                            <img class="product-image" src="<%= product.image %>" />
+                            <div class="product-details">
+                                <button class="view-button">View&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></button>
+                            </div>
+                            <div class="favorite">
+                                <button class="add-to-favorites"
+                                    onclick="toggleFavorite('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')">
+                                    <i id="heartIcon-<%= product._id %>" class="fa-solid fa-heart 
+                                            <% if (product.isFavorite) { %>favorite<% } else { %>not-favorite<% } %>"style="color: 
+                                            <% if (product.isFavorite) { %>red<% } else { %>#8a8a8a<% } %>"></i>
+                                </button>
+                                </div>
+                                <% if (product.Quantity<=0) { %>
+                                    <button class="add-to-cart" style="background-color: #ec4f7e;" disabled>Out of Stock </button>
+                                <% } else if (itemsInCart.includes(product._id)) { %>
+                                    <button class="add-to-cart" style="background-color: #0000FF;" disabled>Added</button>
+                                <% } else { %>
+                                    <button class="add-to-cart"onclick="addproductToCart('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')">AddtoCart</button>
+                                        <% } %>
+                                        <span class="product-price"><%= product.price %></span>
+                                        <input type="hidden" name="productId" value="<%= product._id%>">
+                                    </div>
+                                    <% } %>
+                                    <% } %>
+                                    <% } %>
+                            </div>
+
+                        <% if (classId==="Oblong" ) { %>
+                            <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=e17fc65754da44518d5aefd2603ccd72&metadata=01"
+                                target="_blank">
+                                <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for Women</button>
+                            </a>
+                            <% } else if (classId==="Round" ) { %>
+                                <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=df2efc4e9304481d93054a546c3f85c8&metadata=01"
+                                    target="_blank">
+                                    <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for Women</button>
+                                </a>
+                                <% } else if (classId==="Square" ) { %>
+                                    <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=7298a8862792429b876b9dd27f65e163&metadata=01"
+                                        target="_blank">
+                                        <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for
+                                            Women</button>
+                                    </a>
+                                    <% } else if (classId==="Oval" ) { %>
+                                        <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=4574ca8607b347b1a747d4d81b8e6740&metadata=01"
+                                            target="_blank">
+                                            <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for
+                                                Women</button>
+                                        </a>
+                                        <% } else if (classId==="Heart" ) { %>
+                                            <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=3a23806194f44886874194218ec1b44c&metadata=01"
+                                                target="_blank">
+                                                <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for
+                                                    Women</button>
+                                            </a>
+                                            <% } else { %>
+                                                <a href="#" target="_blank">
+                                                    <button type="button" class="btn btn-primary" style="color: burlywood;">Try Lens Glasses for
+                                                        Women</button>
+                                                </a>
+                                                <% } %>
+
+                    <% } %>
+                    
+                    
+
+<%- include('parts/footer.ejs') %>

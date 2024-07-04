@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- bootstrap call -->
+  <link href="css2/bootstrap.min.css" rel="stylesheet" />
+  <script src="js2/bootstrap.bundle.js"></script>
+  <!-- bootstrap call -->
+
+  <!-- font-awesome CDN call  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <!-- font-awseome CDN call -->
+
+  <!-- Google font call -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Russo+One&display=swap" rel="stylesheet" />
+  <!-- Google font call -->
+
+  <link rel="stylesheet" href="css/home.css" />
+  <title>Add product</title>
+  <style>
+    .product-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .product-table th,
+    .product-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    .product-table th {
+      background-color: #f2f2f2;
+    }
+    .product-actions form {
+      display: flex;
+      gap: 5px;
+    }
+    .product-actions form button {
+      flex: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation bar -->
+<%- include('parts/navbar.ejs') %>
+
+  <div class="d-flex justify-content-start ailign-items-center p-5 vh-100">
+
+    <div class="container text-center">
+
+      <form action="/addproduct" method="POST" enctype="multipart/form-data">
+        
+        <input type="text" class="form-control" name="_id" placeholder="_id">
+        <input type="text" class="form-control" name="name" placeholder="Name">
+        <input type="number" class="form-control" name="price" placeholder="Price">
+
+        <textarea type="password" class="form-control" name="description" placeholder="Description"></textarea>
+          <select type="password" class="form-control" name="category">
+              <option value="" selected>Choose a category</option>
+              <option value="Men Eye Glasses">MEN EYEGLASS</option>
+              <option value="Men Sun Glasses">MEN SUNGLASSES</option>
+              <option value="Kids Glasses">KIDS</option>
+              <option value="Women Eye Glasses">WOMEN EYEGLASSES</option>
+              <option value="Women Sun Glasses">WOMEN SUNGLASSES</option>
+          </select>
+        <input type="number" class="form-control" name="Quantity" placeholder="Quantity">
+        <input type="file" class="form-control" name="image" placeholder="Image">
+        <select type="password" class="form-control" name="face_shape">
+          <option value="" selected>select shape 1</option>
+          <option value="Oval">Oval</option>
+          <option value="Round">Round</option>
+          <option value="Round">Square</option>
+          <option value="Oblong">Oblong</option>
+          <option value="Heart">Heart</option>
+        </select>
+        <select type="password" class="form-control" name="face_shape_2">
+          <option value="" selected>select shape 2</option>
+          <option value="Oval">Oval</option>
+          <option value="Round">Round</option>
+          <option value="Round">Square</option>
+          <option value="Oblong">Oblong</option>
+          <option value="Heart">Heart</option>
+        </select>
+        <select type="password" class="form-control" name="face_shape_3">
+          <option value="" selected>select shape 3</option>
+          <option value="Oval">Oval</option>
+          <option value="Round">Round</option>
+          <option value="Round">Square</option>
+          <option value="Oblong">Oblong</option>
+          <option value="Heart">Heart</option>
+        </select>
+        <input type="submit" value="Add Product" class="btn btn-primary">
+
+      </form>
+
+    </div>
+
+  </div>
+  
+<!-- footer -->
+<footer class="bg-dark text-light py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 footer">
+        <p class="copyrights">&copy; 2023 Iglass. All rights reserved.</p>
+
+        <div class="social-icons">
+          <a class="social-icon social-icon--instagram">
+            <i class="fa-brands fa-instagram"></i>
+            <div class="tooltip">Instagram</div>
+          </a>
+          <a class="social-icon social-icon--linkedin">
+            <i class="fa-brands fa-linkedin"></i>
+            <div class="tooltip">LinkedIn</div>
+          </a>
+          <a class="social-icon social-icon--facebook">
+            <i class="fa-brands fa-facebook"></i>
+            <div class="tooltip">Facebook</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js"></script>
+<script src="./script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js"></script>
+<script src="./js/script.js"></script>
+</body>
+
+</html>

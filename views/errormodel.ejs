@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+    <!-- bootstrap call -->
+    <link href="css2/bootstrap.min.css" rel="stylesheet" />
+    <script src="js2/bootstrap.bundle.js"></script>
+    <!-- bootstrap call -->
+
+    <!-- font-awesome CDN call  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <!-- font-awseome CDN call -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+ <!-- Navigation bar -->
+<%- include('parts/navbar.ejs') %>
+
+<style>
+  
+
+nav * {
+  box-sizing: border-box;
+  transition: all .35s ease;
+}
+
+nav li {
+  display: inline-block;
+  list-style: outside none none;
+  margin: .5em 1em;
+  padding: 0;
+}
+
+nav a {
+  padding: .5em .8em;
+  color: rgba(255, 255, 255, .5);
+  position: relative;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+nav a::before,
+nav a::after {
+  content: '';
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  transition: all .35s ease;
+  opacity: 0;
+}
+
+nav a::before {
+  content: '';
+  right: 0;
+  top: 0;
+  border-top: 3px solid #3E8914;
+  border-right: 3px solid #2E640F;
+  transform: translate(-100%, 50%);
+}
+
+nav a:after {
+  content: '';
+  left: 0;
+  bottom: 0;
+  border-bottom: 3px solid #2E640F;
+  border-left: 3px solid #3E8914;
+  transform: translate(100%, -50%)
+}
+
+nav a:hover:before,
+nav a:hover:after {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+nav a:hover {
+  color: #3DA35D;
+}
+
+#line {
+  border-right: 20px;
+  background-color: #EFE9CC;
+  height: 60px;
+  width: 3px;
+  position: relative;
+  right: 10px;
+}
+
+.nav-submit-btn {
+  border-radius: 15px;
+}
+
+.nav-submit-btn:hover {
+  background-color: rgb(128, 0, 0);
+}
+
+/* Navbar */
+
+.error-container {
+    text-align: center;
+    margin-top: 5vh; /* Vertical centering */
+}
+
+.error-face {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    background-color: #fff; /* White background */
+    border-radius: 50%;
+    border: 5px solid #dc3545; /* Red border */
+    position: relative;
+}
+
+.eyes {
+    width: 20px;
+    height: 20px;
+    background-color: #000; /* Black eyes */
+    border-radius: 50%;
+    position: absolute;
+    top: 35%;
+    left: 25%;
+}
+
+.eyes.left {
+    left: 25%;
+}
+
+.eyes.right {
+    left: 55%;
+}
+
+.mouth {
+    width: 60px;
+    height: 20px;
+    background-color: transparent;
+    border: 2px solid #000; 
+    border-radius: 50px/10px;
+    position: absolute;
+    top: 60%;
+    left: 20%;
+}
+
+.error-message {
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #dc3545;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    color: #6c757d; 
+    margin-bottom: 10px;
+}
+
+</style>
+<body>
+    <div class="error-container">
+        <div class="error-face">
+            <div class="eyes"></div>
+            <div class="mouth"></div>
+        </div>
+        <div class="error-message">
+            <h1>Oops! Something went wrong.</h1>
+            <p>We're sorry, but it seems there was an error processing your request </p>
+            <p></p>
+            <div class="instructions">
+                <p><strong>there are some instructions to get a better result if you upload or take a photo:</strong></p>
+                <ul>
+                    <li><h1>Step 1 : Look Directly at The Camera .... </h1></li>
+                    <li><h1 >Step 2 : Make Sure the Lighting is Adequate And Has Good Brightness For Your Face ...</h1></li>
+                    <li><h1>Step 3 : Take Off your Sunglasses or Hat so That Your Face is Better Visible .</h1></li>
+                </ul>
+            </div>
+
+            <div class="buttons">
+                <a href="virtualTryOn" class="btn btn-primary">Try Again</a>
+                <a href="contactus" class="btn btn-secondary">Contact Support</a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

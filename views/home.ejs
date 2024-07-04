@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+
+  <!-- bootstrap call -->
+  <link href="/css2/bootstrap.min.css" rel="stylesheet" />
+  <script src="/js2/bootstrap.bundle.js"></script>
+
+  <!-- bootstrap call -->
+  <!-- font awesome  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
+  <!-- css link  -->
+  <link rel="stylesheet" href="./css/home.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css" />
+
+  <title>Home</title>
+</head>
+
+<body>
+  <!-- Navigation bar (1) -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1d5c63" ;>
+    <div class="container-fluid">
+      <a style="color: #e4e4d0" class="navbar-brand" href="#">
+        <i class="fa-solid fa-glasses fa-lg" style="color: #e4e4d0"></i>
+        Iglass</a>
+      <div id="line"></div>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="aboutUs">About us</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="contactUs">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cart">Cart</a>
+          </li>
+          <% if(isAdmin) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="addproduct">add product</a>
+            </li>
+            <% } %>
+            <li class="nav-item">
+              <a class="nav-link" href="orders ">Manage Order</a>
+            </li>
+            
+              <% if (isUser) { %>
+              &nbsp;&nbsp;&nbsp;
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">More</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                  <li>
+                    <a class="dropdown-item" href="/logOut">Log out</a>
+                  </li>
+                </ul>             
+              </li>
+              <% } %>
+
+                <% if (!isUser) { %>
+                <li class="nav-item">
+                <a class="nav-link" href="LogIn">Log In</a>
+              </li>
+              <% } %>
+              
+        </ul>
+      </div>
+    </div>
+
+
+    <div>
+      <div id="favoritesIcon" class="">
+        <% if(isUser) { %>
+          <i class="fa fa-heart icon" style="color: #f2ead3"></i>
+          <!-- <span id="favoritesCount" class="favorites-count">0</span> -->
+          <% } %>
+      </div>
+    </div>
+
+
+    <div class="cart-btn">
+      <i id="cart" <% if(isUser) { %>
+        class="fa-solid fa-cart-shopping"
+        <% } %>
+          <% if(isUser) { %>
+            style="color: #f2ead3"
+            <% } %>
+              >
+      </i>
+      <% if(isUser) { %>
+        <span class="cart-quantity">0</span>
+        <% } %>
+    </div>
+
+  </nav>
+  <!-- Navigation bar (1) --> 
+  <!-- get data from database collection -->
+      <div class="favorites-container" style="display: none">
+        <h2>Favorites:</h2>
+        <ul id="favoritesList">
+          <% itemsInFav.forEach(itemId=> { %>
+            <% products.forEach(product=> { %>
+              <% if (product._id===itemId) { %>
+                <div class="favorite-item">
+                  <img src="<%= product.image %>" alt="<%= product.name %>">
+                  <div class="favorite-details">
+                    <h4>
+                      <%= product.name %>
+                    </h4>
+                    <span>$ <%= product.price %></span>
+                    <button class="remove-from-favorites">Remove</button>
+                  </div>
+                </div>
+                <% } %>
+                  <% }) %>
+                    <% }) %>
+          </ul>
+        </div>
+
+
+  <!-- Cart Modal -->
+
+  <div class="cart-modal-overlay">
+    <div class="cart-modal">
+      <i id="close-btn" class="fas fa-times"></i>
+      <h1 class="cart-is-empty">Cart is empty</h1>
+      <div class="product-rows">
+        <% itemsInCart.forEach(itemId=> { %>
+          <% products.forEach(product=> { %>
+            <% if (product._id===itemId) { %>
+              <div class="product-row">
+                <h5 class="product-title">
+                  <%= product.name %>
+                </h5>
+                <span class="cart-price">$<%= product.price %>
+                </span>
+                <img src="<%= product.image %>" class="cart-image" alt="<%= product.name %>">
+                <input class="product-quantity" type="number" value="1">
+                <button class="remove-btn">REMOVE</button>
+              </div>
+              <% } %>
+                <% }) %>
+                  <% }) %>
+      </div>
+      <div class="total">
+        <h1 class="cart-total">TOTAL</h1>
+        <span class="total-price">$<%= totalPrice %></span>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <tbody>
+          <form action="orders" method="POST">
+            <a href="deliveryDetails">
+              <button class="purchase-btn"></button>
+            </a>
+          </form>
+        </tbody>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Navigation bar (2) -->
+  <div class="header style list">
+    <nav class="navbar navbar-expand-lg second-nav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"> </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#newArrivals">new arrivals</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Sunglasses
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li>
+                  <a class="dropdown-item" href="#menSunglasses">Men</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#womenSunglasses">Women</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#kids">Kids</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Eyeglasses
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li>
+                  <a class="dropdown-item" href="#menEyeglasses">Men</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#womenEyeglasses">Women</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#kids">Kids</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="virtualTryOn">virtual-try-on</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!-- Navigation bar (2) -->
+
+    <!-- partial:index.partial.html -->
+    <div class="swiper-container main-slider loading">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <figure
+            class="slide-bgimg"
+            style="background-image: url(/images/sun2.png)"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
+              class="entity-img"
+            />
+          </figure>
+          <div class="content">
+            <p class="title">Shaun Matthews</p>
+            <span class="caption"></span>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <figure
+            class="slide-bgimg"
+            style="background-image: url(/images/sun.png)"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1500643752441-4dc90cda350a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
+              class="entity-img"
+            />
+          </figure>
+          <div class="content">
+            <p class="title">Alexis Berry</p>
+            <span class="caption"></span>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <figure
+            class="slide-bgimg"
+            style="
+              background-image: url(https://images.unsplash.com/photo-1681622341391-b85a3421652f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGdsYXNzZXMlMjBmYXNoaW9ufGVufDB8fDB8fHww);
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1465408953385-7c4627c29435?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
+              class="entity-img"
+            />
+          </figure>
+          <div class="content">
+            <p class="title">Billie Pierce</p>
+            <span class="caption"></span>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <figure
+            class="slide-bgimg"
+            style="
+              background-image: url(https://images.unsplash.com/photo-1480881222301-b5db5622744b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGdsYXNzZXMlMjBmYXNoaW9ufGVufDB8fDB8fHww);
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1538329972958-465d6d2144ed?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTkzNg&ixlib=rb-1.2.1&q=85"
+              class="entity-img"
+            />
+          </figure>
+          <div class="content">
+            <p class="title">Trevor Copeland</p>
+            <span class="caption"></span>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <figure
+            class="slide-bgimg"
+            style="
+              background-image: url(https://plus.unsplash.com/premium_photo-1701108112666-4ef9e32c7d12?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z2xhc3NlcyUyMGZhc2hpb258ZW58MHx8MHx8fDA%3D);
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTk1OQ&ixlib=rb-1.2.1&q=85"
+              class="entity-img"
+            />
+          </figure>
+          <div class="content">
+            <p class="title">Bernadette Newman</p>
+          </div>
+        </div>
+      </div>
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev swiper-button-white"></div>
+      <div class="swiper-button-next swiper-button-white"></div>
+    </div>
+
+    <!-- Thumbnail navigation -->
+    <div class="swiper-container nav-slider loading">
+      <div class="swiper-wrapper" role="navigation">
+        <div class="swiper-slide">
+          <figure
+            class="slide-bgimg"
+            style="background-image: url(images/sun2.png)"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
+              class="entity-img"
+            />
+          </figure>
+          <div class="content">
+            <p class="title">Shaun Matthews</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <figure
+            class="slide-bgimg"
+            style="background-image: url(images/sun.png)"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1500643752441-4dc90cda350a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
+              class="entity-img"
+            />
+          </figure>
+          <div class="content">
+            <p class="title">Alexis Berry</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <figure
+            class="slide-bgimg"
+            style="
+              background-image: url(https://images.unsplash.com/photo-1681622341391-b85a3421652f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGdsYXNzZXMlMjBmYXNoaW9ufGVufDB8fDB8fHww);
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1465408953385-7c4627c29435?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
+              class="entity-img"
+            />
+          </figure>
+          <div class="content">
+            <p class="title">Billie Pierce</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <figure
+            class="slide-bgimg"
+            style="
+              background-image: url(https://images.unsplash.com/photo-1480881222301-b5db5622744b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGdsYXNzZXMlMjBmYXNoaW9ufGVufDB8fDB8fHww);
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1538329972958-465d6d2144ed?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTkzNg&ixlib=rb-1.2.1&q=85"
+              class="entity-img"
+            />
+          </figure>
+          <div class="content">
+            <p class="title">Trevor Copeland</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <figure
+            class="slide-bgimg"
+            style="
+              background-image: url(https://plus.unsplash.com/premium_photo-1701108112666-4ef9e32c7d12?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z2xhc3NlcyUyMGZhc2hpb258ZW58MHx8MHx8fDA%3D);
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTk1OQ&ixlib=rb-1.2.1&q=85"
+              class="entity-img"
+            />
+          </figure>
+          <div class="content">
+            <p class="title">Bernadette Newman</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- partial -->
+
+    <main>
+
+      <!--   end of cart modal -->
+
+      <h3 class="categorie">New Arrivals</h3>
+
+      <div class="image-cards">
+        <div class="image-card">
+          <img
+            src="https://media.ray-ban.com/cms/resource/image/968972/portrait_ratio1x1/652/652/da591747ffd0946cc6e7dbb48a4ecbb/3E5940BBA124B1EFE333015EC9ED6FF3/rb-plp-round-eye.jpg"
+            alt="Image Description"
+          />
+          <div class="card-content">
+            <h2>The round since 1999</h2>
+            <p>The style of those who dare to dream</p>
+            <a href="#">Read More</a>
+          </div>
+        </div>
+
+        <div id="newArrivals" class="image-card">
+          <img
+            src="https://media.ray-ban.com/cms/resource/image/968818/portrait_ratio1x1/652/652/e319d04a830dad1cb177a497c8e10263/86B0E3513D2EA6D548396DD4903FE3E5/rb-plp-aviator-sun.jpg"
+          />
+          <div class="card-content">
+            <h2>THE AVIATOR. SINCE 1937.</h2>
+            <p>The hero of American style</p>
+            <a href="#">Read More</a>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <hr />
+      <div class="search-container">
+        <form class="d-flex">
+          <input
+            id="searchInput"
+            name="searchInput"
+            class="form-control me-2"
+            type="search"
+            placeholder="Search Eyewear"
+            aria-label="Search"
+            style="border-radius: 15px"
+          />
+          <div id="products">
+            <!-- Products will be dynamically inserted here -->
+          </div>
+        </form>
+      </div>
+
+      <br /><br /><br />
+                                                          <!-- uploded products -->
+      
+      <% if (products.length===0) { %>
+        <div class="alert alert-danger">
+          there is no products
+        </div>
+        <%} else { %>
+          
+          <h3 id="products" class="categorie">Men Eye Glasses</h3>
+          <div class="items-container">
+            <% for (let product of products) { %>
+              <% if (product.category==='Men Eye Glasses') { %>                 
+                <div class="card-1 card">
+                  <h4 class="product-title">
+                    <%= product.name %>
+                  </h4>
+                  <img class="product-image" src="<%= product.image %>" />
+                  <div class="product-details">
+                    <button class="view-button">View&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></button>
+                  </div>
+                    <div class="favorite">
+                      <button class="add-to-favorites"                
+                        onclick="toggleFavorite('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')" >
+                        <i id="heartIcon-<%= product._id %>"
+                          class="fa-solid fa-heart 
+                          <% if (product.isFavorite) { %>favorite<% } else { %>not-favorite<% } %>"style="color: 
+                          <% if (product.isFavorite) { %>red<% } else { %>#8a8a8a<% } %>"></i>
+                      </button>
+                    </div>
+                      <% if (product.Quantity<=0) { %>
+                        <button class="add-to-cart" style="background-color: #ec4f7e;" disabled>Out of Stock </button>
+                      <% } else if (itemsInCart.includes(product._id)) { %>
+                          <button class="add-to-cart" style="background-color: #0000FF;" disabled>Added</button>
+                      <% } else { %>
+                          <button class="add-to-cart"
+                          onclick="addproductToCart('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')">Addto Cart</button> 
+                      <% } %>
+                        <span class="product-price"> <%= product.price %> </span>
+                        <input type="hidden" name="productId" value="<%= product._id%>">
+                </div>
+              <% } %>
+            <% } %>
+          </div>
+
+          <h3 id="products" class="categorie">Men sun Glasses</h3>
+          <div class="items-container">
+            <% for (let product of products) { %>
+              <% if (product.category==='Men Sun Glasses' ) { %>
+                <div class="card-1 card">
+                  <h4 class="product-title">
+                    <%= product.name %>
+                  </h4>
+                  <img class="product-image" src="<%= product.image %>" />
+                  <div class="product-details">
+                    <button class="view-button">View&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></button>
+                  </div>
+                  <div class="favorite">
+                    <button class="add-to-favorites"                
+                        onclick="toggleFavorite('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')" >
+                        <i id="heartIcon-<%= product._id %>"
+                          class="fa-solid fa-heart 
+                          <% if (product.isFavorite) { %>favorite<% } else { %>not-favorite<% } %>"style="color: 
+                          <% if (product.isFavorite) { %>red<% } else { %>#8a8a8a<% } %>"></i>
+                      </button>
+                    </div>
+                      <% if (product.Quantity<=0) { %>
+                        <button class="add-to-cart" style="background-color: #ec4f7e;" disabled>Out of Stock </button>
+                      <% } else if (itemsInCart.includes(product._id)) { %>
+                          <button class="add-to-cart" style="background-color: #0000FF;" disabled>Added</button>
+                      <% } else { %>
+                          <button class="add-to-cart"
+                          onclick="addproductToCart('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')">Addto Cart</button> 
+                      <% } %>
+                        <span class="product-price"> <%= product.price %> </span>
+                        <input type="hidden" name="productId" value="<%= product._id%>">
+                </div>
+              <% } %>
+            <% } %>
+          </div>
+
+          <h3 id="products" class="categorie">WOMEN EYEGLASSES</h3>
+          <div class="items-container">
+            <% for (let product of products) { %>
+              <% if (product.category==='Women Eye Glasses' ) { %>
+                <div class="card-1 card">
+                  <h4 class="product-title">
+                    <%= product.name %>
+                  </h4>
+                  <img class="product-image" src="<%= product.image %>" />
+                  <div class="product-details">
+                    <button class="view-button">View&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></button>
+                  </div>
+                  <div class="favorite">
+                    <button class="add-to-favorites"                
+                        onclick="toggleFavorite('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')" >
+                        <i id="heartIcon-<%= product._id %>"
+                          class="fa-solid fa-heart 
+                          <% if (product.isFavorite) { %>favorite<% } else { %>not-favorite<% } %>"style="color: 
+                          <% if (product.isFavorite) { %>red<% } else { %>#8a8a8a<% } %>"></i>
+                      </button>
+                    </div>
+                      <% if (product.Quantity<=0) { %>
+                        <button class="add-to-cart" style="background-color: #ec4f7e;" disabled>Out of Stock </button>
+                      <% } else if (itemsInCart.includes(product._id)) { %>
+                          <button class="add-to-cart" style="background-color: #0000FF;" disabled>Added</button>
+                      <% } else { %>
+                          <button class="add-to-cart"
+                          onclick="addproductToCart('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')">Addto Cart</button> 
+                      <% } %>
+                        <span class="product-price"> <%= product.price %> </span>
+                        <input type="hidden" name="productId" value="<%= product._id%>">
+                </div>
+              <% } %>
+            <% } %>
+          </div>
+
+          <h3 id="products" class="categorie">WOMEN Sun Glasses</h3>
+          <div class="items-container">
+            <% for (let product of products) { %>
+              <% if (product.category==='Women Sun Glasses' ) { %>
+                <div class="card-1 card">
+                  <h4 class="product-title">
+                    <%= product.name %>
+                  </h4>
+                  <img class="product-image" src="<%= product.image %>" />
+                  <div class="product-details">
+                    <button class="view-button">View&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></button>
+                  </div>
+                  <div class="favorite">
+                    <button class="add-to-favorites"                
+                        onclick="toggleFavorite('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')" >
+                        <i id="heartIcon-<%= product._id %>"
+                          class="fa-solid fa-heart 
+                          <% if (product.isFavorite) { %>favorite<% } else { %>not-favorite<% } %>"style="color: 
+                          <% if (product.isFavorite) { %>red<% } else { %>#8a8a8a<% } %>"></i>
+                      </button>
+                    </div>
+                      <% if (product.Quantity<=0) { %>
+                        <button class="add-to-cart" style="background-color: #ec4f7e;" disabled>Out of Stock </button>
+                      <% } else if (itemsInCart.includes(product._id)) { %>
+                          <button class="add-to-cart" style="background-color: #0000FF;" disabled>Added</button>
+                      <% } else { %>
+                          <button class="add-to-cart"
+                          onclick="addproductToCart('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')">Addto Cart</button> 
+                      <% } %>
+                        <span class="product-price"> <%= product.price %> </span>
+                        <input type="hidden" name="productId" value="<%= product._id%>">
+                </div>
+              <% } %>
+            <% } %>
+          </div>
+
+          <h3 id="products" class="categorie">KIDS </h3>
+          <div class="items-container">
+            <% for (let product of products) { %>
+              <% if (product.category==='Kids Glasses' ) { %>
+                <div class="card-1 card">
+                  <h4 class="product-title">
+                    <%= product.name %>
+                  </h4>
+                  <img class="product-image" src="<%= product.image %>" />
+                  <div class="product-details">
+                    <button class="view-button">View&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></button>
+                  </div>
+                  <div class="favorite">
+                    <button class="add-to-favorites"                
+                        onclick="toggleFavorite('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')" >
+                        <i id="heartIcon-<%= product._id %>"
+                          class="fa-solid fa-heart 
+                          <% if (product.isFavorite) { %>favorite<% } else { %>not-favorite<% } %>"style="color: 
+                          <% if (product.isFavorite) { %>red<% } else { %>#8a8a8a<% } %>"></i>
+                      </button>
+                    </div>
+                      <% if (product.Quantity<=0) { %>
+                        <button class="add-to-cart" style="background-color: #ec4f7e;" disabled>Out of Stock </button>
+                      <% } else if (itemsInCart.includes(product._id)) { %>
+                          <button class="add-to-cart" style="background-color: #0000FF;" disabled>Added</button>
+                      <% } else { %>
+                          <button class="add-to-cart"
+                          onclick="addproductToCart('<%= product.name %>', '<%= product.price %>', '<%= product.image %>', '<%= product._id %>')">Addto Cart</button> 
+                      <% } %>
+                        <span class="product-price"> <%= product.price %> </span>
+                        <input type="hidden" name="productId" value="<%= product._id%>">
+                </div>
+              <% } %>
+            <% } %>
+          </div>
+
+      <% } %>
+
+
+      <!-- Product Details Modal -->
+      <div id="productDetailsModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div id="productDetailsContent">
+            <!-- Product details will be dynamically inserted here --> 
+          </div>
+        </div>
+      </div>
+    </main>
+
+
+<%- include('parts/footer.ejs') %>

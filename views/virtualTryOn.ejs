@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual try on</title>
+
+    <!-- bootstrap call -->
+    <link href="/css2/bootstrap.min.css" rel="stylesheet" />
+    <script src="/js2/bootstrap.bundle.js"></script>
+
+    <!-- bootstrap call -->
+    <!-- font awesome  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/virtualTryOn.css" />
+
+    <!-- javascript call  -->
+    <script defer src="js/facedetection/face-api.min.js"></script>
+    <script defer src="js/facedetection/script2.js"></script>
+    <!-- javascript call -->
+  </head>
+  <body>
+    <!-- Navigation bar (1) -->
+    <%- include('parts/navbar.ejs') %>
+
+
+    <!-- Navigation bar (2) -->
+    <div class="header style list">
+      <nav class="navbar navbar-expand-lg second-nav">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"> </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home"
+                  >Explore Eyewear</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="virtualTryOn"
+                  ><b> virtual-try-on</b>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- Navigation bar (2) -->
+
+    <!-- ************************section 1 **************************-->
+    <div class="start">
+      <img src="./images/virtual1.png" alt="11" />
+      <h1>virtual-try-on</h1>
+      <p>
+        you can seamlessly try on your favorite pairs of designer sunglasses and
+        eyeglasses in few simple steps the comfort of your home.feel free to
+        experiment with as many styles as you like using our virtual glasses
+        tool!
+      </p>
+      <div class="work">
+        <img src="./images/VIRTUAL-WORK.png" alt="how work" />
+      </div>
+
+      <!--------------------------- end section 1 ---------------------------------->
+      <!--------------------------- start section 2 ---------------------------------->
+
+      <div class="upload-container d-flex">
+        <img src="./images/gender1.png" alt="" />
+
+        <span>
+          <form action="bestStyle" method="POST" > 
+          <button id ="runDetection" class="upload-btn">Choose Photo</button>   
+          </form>
+
+          <input id="file-upload" class="file-input" type="file" />
+          <div class="file-label" id="file-label">No file chosen</div>
+        </span>
+      </div>
+    </div>
+
+    <!--      OPEN CAMERA      -->
+    <div class="open">
+     
+    </div>
+
+    <!---- ********************************  end   ************************************************* -->
+
+
+    
+    <!--$$$$$$$ footer $$$$$-->
+
+    <footer class="bg-dark text-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-15 footer">
+            <p class="copyrights">&copy; 2023 Iglass. All rights reserved.</p>
+
+            <div class="social-icons">
+              <a class="social-icon social-icon--instagram">
+                <i class="fa-brands fa-instagram"></i>
+                <div class="tooltip">Instagram</div>
+              </a>
+              <a class="social-icon social-icon--linkedin">
+                <i class="fa-brands fa-linkedin"></i>
+                <div class="tooltip">LinkedIn</div>
+              </a>
+              <a class="social-icon social-icon--facebook">
+                <i class="fa-brands fa-facebook"></i>
+                <div class="tooltip">Facebook</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+   
+
+    <script src="./js/script.js"></script>
+    <script src="./js2/bootstrap.bundle.min.js"></script>
+    <script src="./Face-Detection-JavaScript-master/script1.js"></script>
+  </body>
+</html>
