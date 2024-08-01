@@ -1,4 +1,4 @@
-const router = require("express").Router()              // router level
+const router = require("express").Router()           
 const authGuard = require("./guards/auth.guard")
 
 const aboutuscontroller = require("../controllers/aboutus.controller")
